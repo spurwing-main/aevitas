@@ -138,7 +138,7 @@ function main() {
 		// helper function to reset menu
 		function resetMenu() {
 			// menuOpen = false;
-			menuButton.innerHTML = "Menu";
+			// menuButton.innerHTML = "Menu";
 			tl_nav.pause(0); // Reset animations
 			enableScroll([bar, menu]);
 			// menuButton.removeEventListener("click", handleNavButtonClick);
