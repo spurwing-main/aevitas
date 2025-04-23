@@ -1,4 +1,4 @@
-var layerData_50 = {
+var layerData = {
 	type: "FeatureCollection",
 	features: [
 		{
