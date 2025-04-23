@@ -487,9 +487,9 @@ function main() {
 			style: {
 				color: "#68BDE5",
 				fillColor: "#055D86",
-				weight: 2,
-				opacity: 0.7,
-				fillOpacity: 0.3,
+				weight: 1.5,
+				opacity: 1,
+				fillOpacity: 1,
 			},
 		}).addTo(aevitasMap.map);
 		// fit map to markers
