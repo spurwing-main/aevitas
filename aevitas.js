@@ -295,6 +295,7 @@ function main() {
 
 	function aboutUs() {
 		const section = document.querySelector(".s-about");
+		if (!section) return;
 		const imgs = gsap.utils.toArray(".about_imgs .about_img"); // make sure we only get the desktop ones
 		const items = document.querySelector(".about_items");
 
@@ -358,6 +359,7 @@ function main() {
 	}
 
 	function moveAboutHeader(bool) {
+		if (!aboutHeader) return;
 		aboutHeader.classList.toggle("is-moved", bool);
 	}
 
@@ -395,6 +397,110 @@ function main() {
 		});
 	}
 
+	function map() {
+		let aevitasMap = {};
+		aevitasMap.mapElement = document.querySelector(".map_map");
+		aevitasMap.ips = [];
+
+		// return if no map on page
+		if (!aevitasMap.mapElement) {
+			return;
+		}
+
+		console.log("Map found, building...");
+
+		// define marker group and add to map
+		var markerLayer = new L.featureGroup();
+
+		// Collect destination elements
+		const ips = document.querySelectorAll(".map_data-item");
+		if (ips.length === 0) {
+			console.log("No IP data found.");
+			return;
+		}
+
+		// Add markers and tooltips
+		ips.forEach((ipEl) => {
+			const ip = {};
+			ip.lat = parseFloat(ipEl.getAttribute("data-ip-lat"));
+			ip.long = parseFloat(ipEl.getAttribute("data-ip-long"));
+			ip.name = ipEl.getAttribute("data-ip-name");
+			ip.imgSrc = ipEl.getAttribute("data-ip-img");
+			ip.slug = ipEl.getAttribute("data-ip-slug");
+			if (!ip.lat || !ip.long) {
+				return;
+			}
+
+			// Create and add custom circle marker
+			ip.marker = L.circleMarker([ip.lat, ip.long], {
+				radius: 8,
+				color: "#000",
+				fillColor: "#fff",
+				fillOpacity: 1,
+			}).addTo(markerLayer);
+
+			// // Use the createPopupContent function to generate the HTML for each pop-up
+			// ip.popupContent = createPopupContent({
+			// 	imageUrl: ip.imgSrc,
+			// 	address: ip.address,
+			// 	name: ip.name,
+			// 	slug: ip.slug,
+			// 	linkUrl: "/investment-platforms/" + ip.slug,
+			// });
+
+			// Bind the pop-up to the marker
+			ip.marker.bindPopup(ip.popupContent, {
+				maxWidth: 300,
+			});
+
+			aevitasMap.ips.push(ip);
+		});
+
+		// // Define Mapbox tile layer
+		// var tileLayer = new L.tileLayer(
+		// 	"https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+		// 	{
+		// 		id: aethos.map.tileId,
+		// 		accessToken: aethos.map.accessToken,
+		// 	}
+		// );
+
+		// Initialize the map
+		aevitasMap.map = L.map(aevitasMap.mapElement, {
+			attributionControl: false,
+			scrollWheelZoom: false,
+			center: [0, 0],
+			zoom: 0,
+			layers: [markerLayer],
+		});
+
+		// fit map to markers
+
+		aevitasMap.map.fitBounds(markerLayer.getBounds());
+
+		// function createPopupContent({ imageUrl, name, linkUrl }) {
+		// 	return `
+		// 			<div class="popup">
+		// 				<div class="popup_media">
+		// 					<img src="${imageUrl}" alt="${name}" class="img-cover">
+		// 				</div>
+		// 				<div class="popup_content">
+		// 					<div class="popup_header">
+		// 						<div class="label-heading">${name}</div>
+		// 					</div>
+
+		// 					<a class="popup_footer" href="${linkUrl}" aria-label="Contact Aethos ${name}">
+		// 						<div class="button-text-xs">Contact</div>
+		// 						<div class="popup_icon">
+		// 							<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="icon"><path d="M20.9939 11.9938L13.5689 19.9876L13.0001 19.3752L19.8563 11.9938L13.0001 4.61234L13.5689 4L20.9939 11.9938Z" fill="currentColor"></path><path d="M20.547 11.5574L20.5471 11.5946V12.3879L3 12.3878L3.00001 11.5574L20.547 11.5574Z" fill="currentColor"></path></svg>
+		// 						</div>
+		// 					</a>
+		// 				</div>
+		// 			</div>
+		// 		`;
+		// }
+	}
+
 	homeSlider();
 	contactCTASlider();
 
@@ -404,4 +510,5 @@ function main() {
 	ScrollTrigger.refresh();
 
 	navStuff();
+	map();
 }
