@@ -473,6 +473,7 @@ function main() {
 			center: [0, 0],
 			zoom: 0,
 			layers: [markerLayer],
+			dragging: !L.Browser.mobile,
 		});
 
 		var shapeFileData = L.geoJSON(layerData, {
