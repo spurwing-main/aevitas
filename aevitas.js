@@ -270,6 +270,26 @@ function main() {
 		});
 	}
 
+	function contactCTASlider() {
+		var splide = new Splide(".contact-slider", {
+			autoScroll: {
+				speed: 0.5,
+			},
+			direction: "ttb",
+			height: "auto",
+			// loop: true,
+			type: "loop",
+			autoplay: false,
+			breakpoints: {
+				767: {
+					direction: "ltr",
+					width: "auto",
+				},
+			},
+		});
+		splide.mount(window.splide.Extensions);
+	}
+
 	function aboutUs() {
 		const section = document.querySelector(".s-about");
 		const imgs = gsap.utils.toArray(".about_imgs .about_img"); // make sure we only get the desktop ones
@@ -373,8 +393,9 @@ function main() {
 	}
 
 	homeSlider();
+	contactCTASlider();
 
-	/* order of this important to ensure aboutUs claims its space on the page */
+	/* NB order of function calls is important to ensure aboutUs claims its vertical space on the page, otherwise lift anims trigger too early */
 	aboutUs();
 	subtleLift();
 	ScrollTrigger.refresh();
