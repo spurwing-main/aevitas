@@ -3,8 +3,9 @@ function main() {
 
 	const aboutHeader = document.querySelector(".about_header");
 
-	function nav() {
+	function navStuff() {
 		// set some variables
+		const nav = document.querySelector(".nav");
 		const menuButton = document.querySelector(".header-bar_menu-btn");
 		const menu = document.querySelector(".menu-panel_inner");
 		const menuLinks = document.querySelectorAll(".nav-link");
@@ -51,6 +52,7 @@ function main() {
 						menuRevealAnim.play();
 						scrollBuffer = 0;
 						moveAboutHeader(true);
+						nav.classList.remove("is-scrolled");
 					} else if (deltaY > 0 && currentScrollY > hideThreshold) {
 						// Only hide after scrolling past hideThreshold
 						menuRevealAnim.reverse();
@@ -63,6 +65,7 @@ function main() {
 							menuRevealAnim.play();
 							scrollBuffer = 0;
 							moveAboutHeader(true);
+							nav.classList.add("is-scrolled");
 						}
 					}
 
@@ -400,5 +403,5 @@ function main() {
 	subtleLift();
 	ScrollTrigger.refresh();
 
-	nav();
+	navStuff();
 }
