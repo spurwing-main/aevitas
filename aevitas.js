@@ -483,7 +483,7 @@ function main() {
 			})
 			.addTo(aevitasMap.map);
 
-		var shapeFileData = L.geoJSON(layerData, {
+		var shapeFileData = L.geoJSON(layerData_50, {
 			style: {
 				color: "#68BDE5",
 				fillColor: "#055D86",
