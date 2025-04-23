@@ -355,6 +355,10 @@ function main() {
 
 			scrollTl.set(items, { y: `${offset}px`, immediateRender: true });
 			scrollTl.to(items, { y: `-${height + sectionTop}px`, duration: 1 });
+
+			return () => {
+				gsap.set(items, { y: 0, immediateRender: true });
+			};
 		});
 	}
 
