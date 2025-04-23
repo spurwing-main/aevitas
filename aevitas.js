@@ -476,6 +476,13 @@ function main() {
 			dragging: !L.Browser.mobile,
 		});
 
+		aevitasMap.map.zoomControl.remove();
+		L.control
+			.zoom({
+				position: "bottomright",
+			})
+			.addTo(aevitasMap.map);
+
 		var shapeFileData = L.geoJSON(layerData, {
 			style: {
 				color: "#68BDE5",
