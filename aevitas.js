@@ -4,16 +4,8 @@ function main() {
 	const aboutHeader = document.querySelector(".about_header");
 
 	function navStuff() {
-		// set some variables
 		const nav = document.querySelector(".nav");
-		// const menuButton = document.querySelector(".header-bar_menu-btn");
-		// const menu = document.querySelector(".menu-panel_inner");
-		// const menuLinks = document.querySelectorAll(".nav-link");
-		// const menuLinksList = document.querySelector(".menu-panel_menu-links");
-		// const menuCTA = document.querySelector(".menu-panel_menu-cta");
-		// const logoWrap = document.querySelector(".header-bar_logo-wrap");
-		// const bar = document.querySelector(".header-bar_inner");
-		// let menuOpen = false;
+
 		let tl_nav = gsap.timeline({
 			paused: true,
 			defaults: { ease: "power3.out" },
@@ -74,47 +66,6 @@ function main() {
 			});
 		}
 
-		// function handleNavButtonClick() {
-		// 	if (!menuOpen) {
-		// 		console.log("open menu");
-		// 		tl_nav.play();
-		// 		menuButton.innerHTML = "Close";
-		// 		disableScroll([bar, menuLinksList]);
-		// 		menuOpen = true;
-		// 	} else {
-		// 		console.log("close menu");
-		// 		tl_nav.reverse();
-		// 		menuButton.innerHTML = "Menu";
-		// 		enableScroll([bar, menuLinksList]);
-		// 		menuOpen = false;
-		// 	}
-		// }
-
-		// function openNav() {
-		// 	tl_nav
-		// 		.fromTo(
-		// 			menu,
-		// 			{ height: 0 },
-		// 			{
-		// 				height: "100vh",
-		// 				duration: 0.75,
-		// 			}
-		// 		)
-		// 		.to(menuButton, { backgroundColor: "#F0F0F0", duration: 0.3 }, "0")
-		// 		.fromTo(
-		// 			menuLinks,
-		// 			{ y: 20, autoAlpha: 0 },
-		// 			{ y: 0, autoAlpha: 1, stagger: 0.1, duration: 0.3 },
-		// 			"-=0.3"
-		// 		)
-		// 		.fromTo(menuCTA, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3 }, "-=0.2")
-		// 		.to(logoWrap, { color: "#0200c8", duration: 0.3 }, "0");
-
-		// 	// Ensure the click event listener is added only once
-		// 	// menuButton.removeEventListener("click", handleNavButtonClick);
-		// 	// menuButton.addEventListener("click", handleNavButtonClick);
-		// }
-
 		// helper function to disable scroll
 		// function disableScroll(elements) {
 		// 	// const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -128,23 +79,20 @@ function main() {
 		// }
 
 		// helper function to enable scroll
-		// function enableScroll(elements) {
-		// 	// document.body.style.overflow = "";
-		// 	// document.body.style.paddingRight = "";
-		// 	// if (elements) {
-		// 	// 	elements.forEach((el) => {
-		// 	// 		el.style.paddingRight = "";
-		// 	// 	});
-		// 	// }
-		// }
+		function enableScroll(elements) {
+			document.body.style.overflow = "";
+			document.body.style.paddingRight = "";
+			if (elements) {
+				elements.forEach((el) => {
+					el.style.paddingRight = "";
+				});
+			}
+		}
 
 		// helper function to reset menu
 		function resetMenu() {
-			// menuOpen = false;
-			// menuButton.innerHTML = "Menu";
 			tl_nav.pause(0); // Reset animations
-			// enableScroll([bar, menu]);
-			// menuButton.removeEventListener("click", handleNavButtonClick);
+			enableScroll();
 		}
 
 		// set up GSAP MM
