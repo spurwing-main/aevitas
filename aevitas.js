@@ -259,10 +259,7 @@ function main() {
 					end: "+=250%",
 					scrub: true,
 					pin: [section, aboutHeader],
-					// onEnter: () => moveHeader(true),
-					// onLeave: () => moveHeader(false),
-					// onEnterBack: () => moveHeader(true),
-					// onLeaveBack: () => moveHeader(false),
+					invalidateOnRefresh: true,
 				},
 			});
 
@@ -285,12 +282,7 @@ function main() {
 				}
 			});
 
-			// Animate scrolling of text items within the section
-			const sectionTop = section.offsetTop; // distance of section from the top of the page
-			const offset = window.innerHeight - sectionTop; // distance of the section from the top of the viewport
-			const height = items.offsetHeight; // height of the items
-
-			// Now build the scroll timeline
+			// Animate scrolling of text items within the section with dynamic resizing
 			const scrollTl = gsap.timeline({
 				scrollTrigger: {
 					trigger: section,
@@ -301,8 +293,14 @@ function main() {
 				},
 			});
 
-			scrollTl.set(items, { y: `${offset}px`, immediateRender: true });
-			scrollTl.to(items, { y: `-${height + sectionTop}px`, duration: 1 });
+			scrollTl.set(items, {
+				y: () => window.innerHeight - section.offsetTop,
+				immediateRender: true,
+			});
+			scrollTl.to(items, {
+				y: () => -(items.offsetHeight + section.offsetTop),
+				duration: 1,
+			});
 
 			return () => {
 				gsap.set(items, { y: 0, immediateRender: true });
