@@ -450,7 +450,7 @@ function main() {
 			return `
 				<div class="popup">
 						<img src="${imageUrl}" alt="${name}" class="popup_logo" />
-						<a class="button w-button light-ghost" href="${linkUrl}">About Investor</a>
+						<a class="button w-button light-ghost" href="${linkUrl}">About Platform</a>
 				</div>
 			`;
 		}
